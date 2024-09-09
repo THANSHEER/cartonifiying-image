@@ -13,6 +13,4 @@ setuptools==72.1.0
 wheel==0.43.0
 widgetsnbextension==4.0.13
 flask
-os
-uuid
 opencv-python
