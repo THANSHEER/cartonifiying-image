@@ -81,4 +81,4 @@ def process_uploaded_image():
     return jsonify(error="No image file provided")
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    app.run(debug=True,host='0.0.0.0', port=port)
