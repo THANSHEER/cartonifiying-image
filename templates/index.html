@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartoonify Your Image</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Cartoonify Your Image</h1>
+        <div class="flex-split">
+
+            <div class="image-section">
+                <h2 class="sub-title">Choose an Image</h2>
+                <input type="file" id="imageInput" accept="image/*">
+                <img id="inputImage" src="" alt="Input Image">
+            </div>
+            <div class="cartoon-section">
+                <h2 class="sub-title">Cartoonified Image</h2>
+                <img id="cartoonifiedImage" src="" alt="Cartoonified Image">
+                <a id="downloadButton" download="cartoonified_image.png">
+                    <button>Download Image</button>
+                </a>
+           
+            </div>  <!-- code for flexing the ui element -->
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
