@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartoonify Your Image</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <h1 class="title"><i class="fas fa-paint-brush"></i> Cartoonify Your Image</h1>
+            <p class="subtitle">Transform your photos into cartoon-style artwork with a click</p>
+        </header>
+        
+        <div class="cards-container">
+            <div class="card image-section">
+                <h2 class="card-title"><i class="fas fa-image"></i> Upload Image</h2>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="imageInput" accept="image/*">
+                    <label for="imageInput" class="upload-label">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Choose a file or drag it here</span>
+                    </label>
+                </div>
+                <div class="image-preview">
+                    <img id="inputImage" src="" alt="Input Image">
+                </div>
+            </div>
+            
+            <div class="card cartoon-section">
+                <h2 class="card-title"><i class="fas fa-magic"></i> Cartoonified Result</h2>
+                <div class="loader" id="loader">
+                    <div class="spinner"></div>
+                    <span>Processing image...</span>
+                </div>
+                <div class="image-preview">
+                    <img id="cartoonifiedImage" src="" alt="Cartoonified Image">
+                </div>
+                <div class="action-buttons">
+                    <a id="downloadButton" download="cartoonified_image.png" class="btn btn-primary">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                    <button id="shareButton" class="btn btn-secondary">
+                        <i class="fas fa-share-alt"></i> Share
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="app-footer">
+            <p>Made with <i class="fas fa-heart"></i> | Image Cartoonification Tool</p>
+        </footer>
+    </div>
+    <script src="/js/main.js"></script>
+</body>
+</html>

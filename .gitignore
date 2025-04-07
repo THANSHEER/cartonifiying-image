@@ -1,0 +1,46 @@
+# Dependencies
+/node_modules
+/bower_components
+
+# Environment variables and credentials
+.env
+.env.local
+.env.development
+.env.production
+config.js
+
+# User uploaded content and processed images
+/uploads
+/processed_images
+/temp
+
+# Build and distribution folders
+/dist
+/build
+
+# Logs
+/logs
+*.log
+npm-debug.log*
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE specific files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# API keys and secrets
+**/apikey.js
+**/secrets.js
+
+# Python virtual environments
+venv/
+env/
+.venv/
+.env/
+ENV/
+virtualenv/

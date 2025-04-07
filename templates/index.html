@@ -3,30 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cartoonify Your Image</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="description" content="Transform your photos into cartoon-style artwork with our free online cartoonification tool">
+    <meta name="keywords" content="cartoonify, cartoon effect, image filter, photo to cartoon">
+    <title>Cartoonify Your Image - Transform Photos to Cartoon</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+    <!-- Open Graph tags for social sharing -->
+    <meta property="og:title" content="Cartoonify Your Image">
+    <meta property="og:description" content="Transform your photos into cartoon-style artwork with our free online tool">
+    <meta property="og:image" content="{{ url_for('static', filename='img/og-image.jpg', _external=True) }}">
+    <meta property="og:url" content="{{ request.url }}">
 </head>
 <body>
-    <div class="container">
-        <h1 class="title">Cartoonify Your Image</h1>
-        <div class="flex-split">
-
-            <div class="image-section">
-                <h2 class="sub-title">Choose an Image</h2>
-                <input type="file" id="imageInput" accept="image/*">
-                <img id="inputImage" src="" alt="Input Image">
+    <!-- Landing page overlay -->
+    <div id="landingPage" class="landing-page">
+        <div class="landing-content">
+            <h1 class="landing-title">Transform Your Photos</h1>
+            
+            <div class="conversion-options">
+                <div class="option-item">
+                    <i class="fas fa-book-open"></i>
+                    <span class="option-text">Comic Style</span>
+                </div>
+                <div class="option-item">
+                    <i class="fas fa-star"></i>
+                    <span class="option-text">Anime Look</span>
+                </div>
+                <div class="option-item">
+                    <i class="fas fa-pencil-alt"></i>
+                    <span class="option-text">Pencil Sketch</span>
+                </div>
             </div>
-            <div class="cartoon-section">
-                <h2 class="sub-title">Cartoonified Image</h2>
-                <img id="cartoonifiedImage" src="" alt="Cartoonified Image">
-                <a id="downloadButton" download="cartoonified_image.png">
-                    <button>Download Image</button>
-                </a>
-           
-            </div>  <!-- code for flexing the ui element -->
+            
+            <p class="landing-description">Create amazing cartoon versions of your photos with our advanced AI tools</p>
+            
+            <button id="getStartedButton" class="btn btn-primary btn-large">
+                <i class="fas fa-magic"></i> Get Started
+            </button>
         </div>
     </div>
-    <script src="{{ url_for('static', filename='main.js') }}"></script>
+
+    <div id="mainApp" class="container hidden">
+        <header class="app-header">
+            <div class="logo">
+                <i class="fas fa-paint-brush"></i>
+            </div>
+            <div class="title-container">
+                <h1 class="title">Cartoonify Your Image</h1>
+                <p class="subtitle">Transform your photos into cartoon-style artwork with a click</p>
+            </div>
+        </header>
+        
+        <div class="app-wrapper">
+            <!-- Status notifications -->
+            <div id="statusNotification" class="status-notification"></div>
+            
+            <div class="cards-container">
+                <div class="card image-section">
+                    <h2 class="card-title"><i class="fas fa-image"></i> Upload Image</h2>
+                    <div class="upload-container">
+                        <!-- Traditional file input button for reliable operation -->
+                        <div class="direct-upload">
+                            <input type="file" id="imageInput" accept="image/*">
+                            <button type="button" class="btn btn-primary" id="uploadButton">
+                                <i class="fas fa-upload"></i> Select Image
+                            </button>
+                        </div>
+                        
+                        <!-- Display selected filename -->
+                        <div class="file-info" id="fileInfo">No file selected</div>
+                        
+                        <!-- Removing drop area section as it's not used -->
+                    </div>
+                
+                    <div class="image-preview">
+                        <img id="inputImage" src="" alt="Input Image">
+                        <div class="placeholder" id="inputPlaceholder">
+                            <i class="fas fa-image"></i>
+                            <p>Preview will appear here</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Customization card -->
+                <div class="card customization-section">
+                    <h2 class="card-title"><i class="fas fa-sliders-h"></i> Customize Effect</h2>
+                    <div class="customization-controls">
+                        <div class="control-group">
+                            <label for="edgeStrength">Edge Strength <span class="value-display">50</span></label>
+                            <input type="range" id="edgeStrength" min="1" max="100" value="50" class="slider">
+                            <div class="slider-labels">
+                                <span>Subtle</span>
+                                <span>Strong</span>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="colorSimplification">Color Simplification <span class="value-display">8</span></label>
+                            <input type="range" id="colorSimplification" min="2" max="32" value="8" class="slider">
+                            <div class="slider-labels">
+                                <span>Few</span>
+                                <span>Many</span>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="smoothingLevel">Smoothing Level <span class="value-display">7</span></label>
+                            <input type="range" id="smoothingLevel" min="1" max="20" value="7" class="slider">
+                            <div class="slider-labels">
+                                <span>Sharp</span>
+                                <span>Smooth</span>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label>Style</label>
+                            <div class="button-group">
+                                <button id="styleComic" class="style-button active"><i class="fas fa-book-open"></i> Comic</button>
+                                <button id="styleAnime" class="style-button"><i class="fas fa-star"></i> Anime</button>
+                                <button id="stylePencil" class="style-button"><i class="fas fa-pencil-alt"></i> Pencil</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Comic Style Advanced Options -->
+                        <div id="comicAdvancedControls" class="advanced-controls">
+                            <h3 class="section-title"><i class="fas fa-sliders-h"></i> Comic Style Options</h3>
+                            
+                            <div class="control-group">
+                                <label for="comicLineThickness">Line Thickness <span class="value-display">5</span></label>
+                                <input type="range" id="comicLineThickness" min="1" max="10" value="5" class="slider">
+                                <div class="slider-labels">
+                                    <span>Thin</span>
+                                    <span>Thick</span>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="comicSaturation">Color Vibrancy <span class="value-display">100</span></label>
+                                <input type="range" id="comicSaturation" min="50" max="150" value="100" class="slider">
+                                <div class="slider-labels">
+                                    <span>Muted</span>
+                                    <span>Vibrant</span>
+                                </div>
+                            </div>
+                            
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="comicBoldEdges" checked>
+                                <label for="comicBoldEdges">Bold Outlines</label>
+                            </div>
+                        </div>
+                        
+                        <button id="applyCustomization" class="btn btn-primary apply-btn">
+                            <i class="fas fa-magic"></i> Apply Effects
+                        </button>
+                        
+                        <button id="resetCustomization" class="btn btn-secondary reset-btn">
+                            <i class="fas fa-undo"></i> Reset to Default
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card cartoon-section">
+                    <h2 class="card-title"><i class="fas fa-magic"></i> Cartoonified Result</h2>
+                    <div class="loader" id="loader">
+                        <div class="spinner"></div>
+                        <span>Processing image...</span>
+                    </div>
+                    <div class="image-preview">
+                        <img id="cartoonifiedImage" src="" alt="Cartoonified Image">
+                        <div class="placeholder" id="resultPlaceholder">
+                            <i class="fas fa-wand-magic-sparkles"></i>
+                            <p>Your cartoonified image will appear here</p>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <a id="downloadButton" download="cartoonified_image.png" class="btn btn-primary disabled">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                        <button id="shareButton" class="btn btn-secondary disabled">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p>Made with <i class="fas fa-heart"></i> | Image Cartoonification Tool</p>
+                <div class="footer-links">
+                    <a href="#" id="privacyLink">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="#" id="termsLink">Terms of Use</a>
+                    <span class="separator">|</span>
+                    <a href="#" id="aboutLink">About</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Modal for error messages and notifications -->
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="modalTitle">Notification</h3>
+            <p id="modalMessage"></p>
+            <button id="modalCloseButton" class="btn btn-primary">OK</button>
+        </div>
+    </div>
+    
+    <!-- Script placed at the end for better loading performance -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
